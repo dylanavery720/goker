@@ -5,12 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	invalidhand "poker/invalidHand"
-	isflush "poker/isFlush"
-	isofakind "poker/isOfAKind"
-	isstraight "poker/isStraight"
-
-	getvalues "poker/getValues"
+	poker "poker/pkg/poker"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -20,23 +15,23 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 	key := keys[0]
 	var rank = ""
-	var vals = getvalues.GetValues(key)
-	var validated = invalidhand.InvalidHand(vals)
+	var vals = poker.GetValues(key)
+	var validated = poker.InvalidHand(vals)
 	if validated == "Invalid Hand" {
 		fmt.Fprintf(w, "%q\n", validated)
 		return
 	}
-	rank = isflush.IsFlush(vals)
+	rank = poker.IsFlush(vals)
 	if rank != "next" {
 		fmt.Fprintf(w, "%q\n", rank)
 		return
 	}
-	rank = isstraight.IsStraight(vals)
+	rank = poker.IsStraight(vals)
 	if rank != "next" {
 		fmt.Fprintf(w, "%q\n", rank)
 		return
 	}
-	rank = isofakind.IsOfAKind(vals)
+	rank = poker.IsOfAKind(vals)
 	fmt.Fprintf(w, "%q\n", rank)
 }
 
