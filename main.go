@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	invalidhand "poker/invalidHand"
 	isflush "poker/isFlush"
 	isofakind "poker/isOfAKind"
 	isstraight "poker/isStraight"
@@ -15,12 +16,16 @@ import (
 func handler(w http.ResponseWriter, r *http.Request) {
 	keys, ok := r.URL.Query()["hand"]
 	if !ok || len(keys[0]) < 1 {
-		log.Println("Url Param 'hand' is missing")
 		return
 	}
 	key := keys[0]
 	var rank = ""
 	var vals = getvalues.GetValues(key)
+	var validated = invalidhand.InvalidHand(vals)
+	if validated == "Invalid Hand" {
+		fmt.Fprintf(w, "%q\n", validated)
+		return
+	}
 	rank = isflush.IsFlush(vals)
 	if rank != "next" {
 		fmt.Fprintf(w, "%q\n", rank)

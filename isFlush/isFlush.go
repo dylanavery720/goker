@@ -1,6 +1,9 @@
 package isflush
 
-import types "poker/types"
+import (
+	isstraight "poker/isStraight"
+	types "poker/types"
+)
 
 func IsFlush(hand types.Hand) string {
 	var rank = ""
@@ -12,5 +15,11 @@ func IsFlush(hand types.Hand) string {
 		}
 	}
 	rank = "Flush"
+	if isstraight.IsStraight(hand) == "Straight" {
+		rank = "Straight Flush"
+	}
+	if hand.Values[0] >= 10 {
+		rank = "Royal Flush"
+	}
 	return rank
 }

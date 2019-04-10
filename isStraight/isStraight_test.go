@@ -20,3 +20,11 @@ func TestIsStraightHandleAce(t *testing.T) {
 		t.Error("Expected Straight, got ", v)
 	}
 }
+
+func TestIsStraightHandleAce2(t *testing.T) {
+	var vals = getvalues.GetValues("As 10s Js Qh Kd")
+	var v = IsStraight(vals)
+	if v != "Straight" {
+		t.Error("Expected Straight, got ", v)
+	}
+}

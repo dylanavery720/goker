@@ -22,7 +22,6 @@ func IsOfAKind(hand types.Hand) string {
 			if len(cards) < 3 {
 				return "Full House"
 			}
-
 			if len(cards) < 4 {
 				return "Two Pair"
 			}

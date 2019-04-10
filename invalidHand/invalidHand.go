@@ -1,24 +1,16 @@
-// if (hand.values.length != 5 || hand.values.includes(undefined)) return 'Invalid Hand'
-
 package invalidhand
 
 import (
-	getvalues "poker/getValues"
-	"testing"
+	isstraight "poker/isStraight"
+	types "poker/types"
 )
 
-func TestShouldHold5Cards(t *testing.T) {
-	var vals = getvalues.GetValues("5s 4s 7s 6h")
-	var v = InvalidHand(vals)
-	if v != "Invalid Hand" {
-		t.Error("Expected Invalid Hand, got ", v)
+func InvalidHand(hand types.Hand) string {
+	if len(hand.Values) != 5 {
+		return "Invalid Hand"
 	}
-}
-
-func TestShouldNotExceptStrangeCards(t *testing.T) {
-	var vals = getvalues.GetValues("15s Fs 7s 6h 6h")
-	var v = InvalidHand(vals)
-	if v != "Invalid Hand" {
-		t.Error("Expected Invalid Hand, got ", v)
+	if isstraight.Contains(hand.Values, 0) {
+		return "Invalid Hand"
 	}
+	return "Valid Hand"
 }
