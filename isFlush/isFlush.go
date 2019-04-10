@@ -8,7 +8,7 @@ func IsFlush(hand types.Hand) string {
 		if hand.Suits[i] == hand.Suits[i+1] {
 			continue
 		} else {
-			return "false"
+			return "next"
 		}
 	}
 	rank = "Flush"

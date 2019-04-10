@@ -10,7 +10,7 @@ func IsStraight(hand types.Hand) string {
 		if hand.Values[i] == (hand.Values[i+1] - 1) {
 			continue
 		} else {
-			return "false"
+			return "next"
 		}
 	}
 	return "Straight"
