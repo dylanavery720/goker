@@ -5,7 +5,7 @@ import (
 )
 
 func TestThreeOfAKind(t *testing.T) {
-	var vals = GetValues("10s Qs 8s 8s 8s")
+	var vals = GetValues("2s Kh Kd Kc Js")
 	var v = IsOfAKind(vals)
 	if v != "Three Of A Kind" {
 		t.Error("Expected Three Of A Kind, got ", v)
