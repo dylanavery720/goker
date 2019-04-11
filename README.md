@@ -14,6 +14,14 @@ This application provides a user with the ability to select a hand of 5 playing 
     ./main
     ```
 
+ * For tests
+    ```
+    #!sh
+    cd pkg/poker
+    go test
+    ```
+
+
 ### Frontend Setup and Run
  * Install dependencies
     ```
