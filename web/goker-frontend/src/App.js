@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {getRank} from "./Actions/requests"
 import Select from "./Select/Select"
@@ -44,20 +43,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-           Rank: {this.state.rank}
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
         {!this.state.showRank && 
         <div>
         <p>Card 1</p>
@@ -78,6 +63,11 @@ class App extends Component {
         <button onClick={() => this.submitCards()}>SUBMIT HAND FOR REVIEW</button>
         </div>
         }
+         <footer className="App-footer">
+          <p>
+           Rank: {this.state.rank}
+          </p>
+        </footer>
       </div>
     );
   }
