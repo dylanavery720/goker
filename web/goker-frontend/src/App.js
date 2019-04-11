@@ -52,6 +52,11 @@ class App extends Component {
     const {rank, hand} = this.state
     return (
       <div className="App">
+      <header className="App-header">
+          <p>
+           GOKER. SELECT YOUR CARDS.
+          </p>
+        </header>
         {!this.state.showRank && 
         <div>
         <p>Card 1</p>
@@ -79,10 +84,10 @@ class App extends Component {
            Hand: 
            <ContentEditable
               innerRef={this.contentEditable}
-              html={hand} // innerHTML of the editable div
-              disabled={false}       // use true to disable editing
-              onChange={(evt) => this.handleChange(evt)} // handle innerHTML change
-              tagName='article' // Use a custom HTML tag (uses a div by default)
+              html={hand} 
+              disabled={false} 
+              onChange={(evt) => this.handleChange(evt)} 
+              tagName='p'
             />
           <button onClick={() => this.resubmitCards()}>RESUBMIT HAND FOR REVIEW</button>
         </footer>
