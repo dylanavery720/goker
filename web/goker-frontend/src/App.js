@@ -3,11 +3,13 @@ import './App.css';
 import {getRank} from "./Actions/requests"
 import Select from "./Select/Select"
 import {deck, suits} from "./Constants/constants"
+import ContentEditable from 'react-contenteditable'
 
 
 class App extends Component {
   constructor() {
     super()
+    this.contentEditable = React.createRef()
     this.state = {
       rank: "",
       showRank: false,
@@ -35,6 +37,15 @@ class App extends Component {
     hand = `${card1}${card1Suit} ${card2}${card2Suit} ${card3}${card3Suit} ${card4}${card4Suit} ${card5}${card5Suit}`
     const rank = await getRank(hand)
     this.setState({rank, hand, showRank: true})
+  }
+
+  async resubmitCards() {
+    const rank = await getRank(this.state.hand)
+    this.setState({rank, hand: this.state.hand, showRank: true})
+  }
+
+  async handleChange(evt) {
+    this.setState({hand: evt.target.value});
   }
 
   render() {
@@ -65,9 +76,15 @@ class App extends Component {
           <p>
            Rank: {rank}
           </p>
-          <p>
-           Hand: {hand}
-          </p>
+           Hand: 
+           <ContentEditable
+              innerRef={this.contentEditable}
+              html={hand} // innerHTML of the editable div
+              disabled={false}       // use true to disable editing
+              onChange={(evt) => this.handleChange(evt)} // handle innerHTML change
+              tagName='article' // Use a custom HTML tag (uses a div by default)
+            />
+          <button onClick={() => this.resubmitCards()}>RESUBMIT HAND FOR REVIEW</button>
         </footer>
       </div>
     );
