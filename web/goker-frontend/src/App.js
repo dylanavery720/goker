@@ -11,6 +11,7 @@ class App extends Component {
     super()
     this.state = {
       rank: "",
+      showRank: false,
       card1: "",
       card1Suit: "",
       card2: "",
@@ -32,11 +33,12 @@ class App extends Component {
     this.setState({[identifier]: value })
   }
 
-  submitCards() {
+  async submitCards() {
     const {card1, card1Suit, card2, card2Suit, card3, card3Suit, card4, card4Suit, card5, card5Suit} = this.state
     let hand = ""
     hand = `${card1}${card1Suit} ${card2}${card2Suit} ${card3}${card3Suit} ${card4}${card4Suit} ${card5}${card5Suit}`
-    console.log(hand,'ranky')
+    const rank = await getRank(hand)
+    this.setState({rank, showRank: true})
   }
 
   render() {
@@ -56,6 +58,8 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        {!this.state.showRank && 
+        <div>
         <p>Card 1</p>
         <Select handleClick={(value) => this.handleClick(value, "card1")} options={Object.keys(deck)}/>
         <Select handleClick={(value) => this.handleClick(value, "card1Suit")} options={Object.keys(suits)}/>
@@ -71,7 +75,9 @@ class App extends Component {
         <p>Card 5</p>
         <Select handleClick={(value) => this.handleClick(value, "card5")} options={Object.keys(deck)}/>
         <Select handleClick={(value) => this.handleClick(value, "card5Suit")} options={Object.keys(suits)}/>
-        <button onClick={() => this.submitCards()}></button>
+        <button onClick={() => this.submitCards()}>SUBMIT HAND FOR REVIEW</button>
+        </div>
+        }
       </div>
     );
   }
