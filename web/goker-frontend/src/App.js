@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       rank: "",
       showRank: false,
+      hand: "",
       card1: "",
       card1Suit: "",
       card2: "",
@@ -24,10 +25,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    //TODO: Use Picky for Dropdown to select 5 cards. Submit to get rank.
-  }
-
   handleClick(value, identifier) {
     this.setState({[identifier]: value })
   }
@@ -37,11 +34,11 @@ class App extends Component {
     let hand = ""
     hand = `${card1}${card1Suit} ${card2}${card2Suit} ${card3}${card3Suit} ${card4}${card4Suit} ${card5}${card5Suit}`
     const rank = await getRank(hand)
-    this.setState({rank, showRank: true})
+    this.setState({rank, hand, showRank: true})
   }
 
   render() {
-    const {card1, card1Suit, card2, card2Suit, card3, card3Suit, card4, card4Suit, card5, card5Suit} = this.state
+    const {rank, hand} = this.state
     return (
       <div className="App">
         {!this.state.showRank && 
@@ -66,10 +63,10 @@ class App extends Component {
         }
          <footer className="App-footer">
           <p>
-           Rank: {this.state.rank}
+           Rank: {rank}
           </p>
           <p>
-           Hand: {`${card1}${card1Suit} ${card2}${card2Suit} ${card3}${card3Suit} ${card4}${card4Suit} ${card5}${card5Suit}`}
+           Hand: {hand}
           </p>
         </footer>
       </div>
