@@ -3,14 +3,17 @@ import './App.css';
 import {getRank} from "./Actions/requests"
 import Select from "./Select/Select"
 import {deck, suits} from "./Constants/constants"
+import ContentEditable from 'react-contenteditable'
 
 
 class App extends Component {
   constructor() {
     super()
+    this.contentEditable = React.createRef()
     this.state = {
       rank: "",
       showRank: false,
+      hand: "",
       card1: "",
       card1Suit: "",
       card2: "",
@@ -24,10 +27,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    //TODO: Use Picky for Dropdown to select 5 cards. Submit to get rank.
-  }
-
   handleClick(value, identifier) {
     this.setState({[identifier]: value })
   }
@@ -37,13 +36,27 @@ class App extends Component {
     let hand = ""
     hand = `${card1}${card1Suit} ${card2}${card2Suit} ${card3}${card3Suit} ${card4}${card4Suit} ${card5}${card5Suit}`
     const rank = await getRank(hand)
-    this.setState({rank, showRank: true})
+    this.setState({rank, hand, showRank: true})
+  }
+
+  async resubmitCards() {
+    const rank = await getRank(this.state.hand)
+    this.setState({rank, hand: this.state.hand, showRank: true})
+  }
+
+  async handleChange(evt) {
+    this.setState({hand: evt.target.value});
   }
 
   render() {
-    const {card1, card1Suit, card2, card2Suit, card3, card3Suit, card4, card4Suit, card5, card5Suit} = this.state
+    const {rank, hand} = this.state
     return (
       <div className="App">
+      <header className="App-header">
+          <p>
+           GOKER. SELECT YOUR CARDS.
+          </p>
+        </header>
         {!this.state.showRank && 
         <div>
         <p>Card 1</p>
@@ -66,11 +79,17 @@ class App extends Component {
         }
          <footer className="App-footer">
           <p>
-           Rank: {this.state.rank}
+           Rank: {rank}
           </p>
-          <p>
-           Hand: {`${card1}${card1Suit} ${card2}${card2Suit} ${card3}${card3Suit} ${card4}${card4Suit} ${card5}${card5Suit}`}
-          </p>
+           Hand: 
+           <ContentEditable
+              innerRef={this.contentEditable}
+              html={hand} 
+              disabled={false} 
+              onChange={(evt) => this.handleChange(evt)} 
+              tagName='p'
+            />
+          <button onClick={() => this.resubmitCards()}>RESUBMIT HAND FOR REVIEW</button>
         </footer>
       </div>
     );
