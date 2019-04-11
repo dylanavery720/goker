@@ -41,6 +41,7 @@ class App extends Component {
   }
 
   render() {
+    const {card1, card1Suit, card2, card2Suit, card3, card3Suit, card4, card4Suit, card5, card5Suit} = this.state
     return (
       <div className="App">
         {!this.state.showRank && 
@@ -66,6 +67,9 @@ class App extends Component {
          <footer className="App-footer">
           <p>
            Rank: {this.state.rank}
+          </p>
+          <p>
+           Hand: {`${card1}${card1Suit} ${card2}${card2Suit} ${card3}${card3Suit} ${card4}${card4Suit} ${card5}${card5Suit}`}
           </p>
         </footer>
       </div>
