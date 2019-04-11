@@ -3,7 +3,7 @@ Goker (Dylan Avery)
 
 Summary
 ---
-This application provides a user with the ability to select a hand of 5 playing cards and get its rank in a game of poker.
+This application provides a user with the ability to select a hand of 5 playing cards and get its rank in a game of poker. The server is written in Golang. 
 
 ### Server
 
