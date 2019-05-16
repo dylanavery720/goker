@@ -14,9 +14,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if !ok || len(keys[0]) < 1 {
 		return
 	}
-	key := keys[0]
+	hand := keys[0]
 	var rank = ""
-	var vals = poker.GetValues(key)
+	var vals = poker.GetValues(hand)
 	var validated = poker.InvalidHand(vals)
 	if validated == "Invalid Hand" {
 		fmt.Fprintf(w, "%q\n", validated)
