@@ -67,3 +67,19 @@ func TestRoyalFlush(t *testing.T) {
 		t.Error("Expected Royal Flush, got ", v)
 	}
 }
+
+func TestEdgeCaseWithLowStraight(t *testing.T) {
+	var vals = GetValues("2d 3d 4d 5d 6d")
+	var v = IsFlush(vals)
+	if v != "Straight Flush" {
+		t.Error("Expected Straight Flush, got ", v)
+	}
+}
+
+func TestEdgeCaseWithLowAceStraight(t *testing.T) {
+	var vals = GetValues("2d 3d 4d 5d Ad")
+	var v = IsFlush(vals)
+	if v != "Straight Flush" {
+		t.Error("Expected Straight Flush, got ", v)
+	}
+}
