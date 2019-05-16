@@ -42,5 +42,6 @@ func enableCors(w *http.ResponseWriter) {
 
 func main() {
 	http.HandleFunc("/", handler)
+	fmt.Printf("server is listening on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -43,3 +43,27 @@ func TestTwoPair(t *testing.T) {
 		t.Error("Expected Two Pair, got ", v)
 	}
 }
+
+func TestFlush(t *testing.T) {
+	var vals = GetValues("10s 10s 7s 8s 8s")
+	var v = IsFlush(vals)
+	if v != "Flush" {
+		t.Error("Expected Flush, got ", v)
+	}
+}
+
+func TestStraightFlush(t *testing.T) {
+	var vals = GetValues("10s 9s 7s 8s 6s")
+	var v = IsFlush(vals)
+	if v != "Straight Flush" {
+		t.Error("Expected Straight Flush, got ", v)
+	}
+}
+
+func TestRoyalFlush(t *testing.T) {
+	var vals = GetValues("10s Js Qs Ks As")
+	var v = IsFlush(vals)
+	if v != "Royal Flush" {
+		t.Error("Expected Royal Flush, got ", v)
+	}
+}

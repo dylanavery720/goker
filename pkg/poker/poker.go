@@ -28,7 +28,6 @@ var deck = map[string]int{
 
 func IsStraight(hand Hand) string {
 	var isStraightWithAce = Contains(hand.Values, 2)
-	isStraightWithAce = Contains(hand.Values, 14)
 	if isStraightWithAce == true {
 		hand.Values = handleAce(hand)
 	}
